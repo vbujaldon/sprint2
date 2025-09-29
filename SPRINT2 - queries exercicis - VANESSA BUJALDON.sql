@@ -4,18 +4,19 @@ USE `transactions`;
 SELECT DISTINCT country AS llista_pais_amb_vendes
 FROM transaction t
 JOIN company c ON t.company_id = c.id
-WHERE declined = 0;
+WHERE declined = 0
+ORDER BY llista_pais_amb_vendes;
 
 SELECT COUNT(DISTINCT country) AS recompte_països_amb_vendes
  FROM transaction t
  JOIN company c ON t.company_id = c.id
- WHERE declined = 0;
+ WHERE declined = 0
+ ORDER BY recompte_països_amb_vendes;
  
-SELECT country, ROUND(AVG(amount),2) AS mitja_transaccions
-FROM transaction t
-JOIN company c ON t.company_id = c.id
-GROUP BY country
-ORDER BY mitja_transaccions DESC
+SELECT t.company_id, ROUND(AVG(amount),2) AS mitja_transaccions 
+FROM transaction t JOIN company c ON t.company_id = c.id 
+GROUP BY t.company_id 
+ORDER BY mitja_transaccions DESC 
 LIMIT 1;
 
 -- NIVELL 1 - EX3
